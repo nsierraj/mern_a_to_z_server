@@ -13,7 +13,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('Hello world and universe!'));
+app.get('/', (req, res) => res.send('Hello world, galaxies, and universe!'));
 
 app.use('/api/books', books);
 
