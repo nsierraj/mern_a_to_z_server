@@ -16,8 +16,10 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    sar -r -u 5 > system_usage.txt &
-    echo $! > sar_pid.txt
+    sar -r 5 > memory_usage.txt &
+    echo $! > sar_mem_pid.txt
+    sar -u 5 > cpu_usage.txt &
+    echo $! > sar_cpu_pid.txt
   displayName: 'Start CPU and Memory monitoring'
 
 - script: |
@@ -25,7 +27,8 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    kill $(cat sar_pid.txt)
+    kill $(cat sar_mem_pid.txt)
+    kill $(cat sar_cpu_pid.txt)
   displayName: 'Stop monitoring'
 
 - task: ArchiveFiles@2
@@ -43,5 +46,10 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-   PathtoPublish: 'system_usage.txt'
-   ArtifactName: 'SystemUsage'
+   PathtoPublish: 'memory_usage.txt'
+   ArtifactName: 'MEMUsage'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+   PathtoPublish: 'cpu_usage.txt'
+   ArtifactName: 'CPUUsage'
