@@ -11,9 +11,9 @@ pool:
 
 steps:
 - script: |
-    sar -r 5 > memory_usage.txt &
+    sar -r 2 > memory_usage.txt &
     echo $! > sar_mem_pid.txt
-    sar -u 5 > cpu_usage.txt &
+    sar -u 2 > cpu_usage.txt &
     echo $! > sar_cpu_pid.txt
   displayName: 'Start CPU and Memory monitoring'
 - task: NodeTool@0
