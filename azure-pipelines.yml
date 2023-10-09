@@ -10,17 +10,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'
-  displayName: 'Install Node.js'
-
 - script: |
     sar -r 5 > memory_usage.txt &
     echo $! > sar_mem_pid.txt
     sar -u 5 > cpu_usage.txt &
     echo $! > sar_cpu_pid.txt
   displayName: 'Start CPU and Memory monitoring'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
 
 - script: |
     npm install
