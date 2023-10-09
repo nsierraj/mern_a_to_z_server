@@ -40,3 +40,8 @@ steps:
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     artifact: drop
+
+- task: PublishBuildArtifacts@1
+  inputs:
+   PathtoPublish: 'cpu_usage.txt'
+   ArtifactName: 'CPUUsage'
